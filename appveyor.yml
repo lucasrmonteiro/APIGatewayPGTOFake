@@ -27,8 +27,8 @@ test_script:
   # restore packages for our unit tests
   - cmd: dotnet restore ./APIGateway.Tests/APIGateway.Tests.csproj --verbosity m
   # run the unit tests (requires changing into the test directory)
-  - cmd: cd tests
-  - cmd: dotnet xunit
+  - cmd: cd ./APIGateway.Tests/
+  - cmd: dotnet test
 on_finish :
   # any cleanup in here
 deploy: off
