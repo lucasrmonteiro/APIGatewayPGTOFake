@@ -12,20 +12,20 @@ before_build:
   # Display .NET Core version
   - cmd: dotnet --version
   # Display minimal restore text
-  - cmd: dotnet restore ./src/src.csproj --verbosity m
+  - cmd: dotnet restore ./APIGateway.Query/APIGateway.Query.csproj --verbosity m
 build_script:
   # output will be in ./src/bin/debug/netcoreapp1.1/publish
-  - cmd: dotnet publish ./src/src.csproj
+  - cmd: dotnet publish ./APIGateway.Query/APIGateway.Query.csproj
 after_build:
   # For once the build has completed
 artifacts:
- - path: '\src\bin\Debug\netcoreapp1.1\publish'
+ - path: '\src\bin\Debug\netcoreapp2.1\publish'
    name: WebSite
    type: WebDeployPackage
 clone_depth: 1
 test_script:
   # restore packages for our unit tests
-  - cmd: dotnet restore ./tests/tests.csproj --verbosity m
+  - cmd: dotnet restore ./APIGateway.Tests/APIGateway.Tests.csproj --verbosity m
   # run the unit tests (requires changing into the test directory)
   - cmd: cd tests
   - cmd: dotnet xunit
