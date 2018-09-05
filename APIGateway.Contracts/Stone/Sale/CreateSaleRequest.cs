@@ -17,7 +17,7 @@ namespace GatewayApiClient.DataContracts {
         /// Lista de transações de cartão de crédito
         /// </summary>
         [DataMember(EmitDefaultValue = false)]
-        public Collection<CreditCardTransaction> CreditCardTransactionCollection { get; set; }
+        public Collection<CreditCardTransactionStone> CreditCardTransactionCollection { get; set; }
 
         /// <summary>
         /// Lista de transações de boleto

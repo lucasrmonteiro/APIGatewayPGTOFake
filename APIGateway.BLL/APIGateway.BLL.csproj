@@ -4,8 +4,18 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Folder Include="Business\" />
+    <ProjectReference Include="..\APIGateway.Contracts\APIGateway.Contracts.csproj" />
+    <ProjectReference Include="..\ApiGateway.DAL\ApiGateway.DAL.csproj" />
+    <ProjectReference Include="..\APIGateway.DTO\APIGateway.DTO.csproj" />
   </ItemGroup>
 
 </Project>

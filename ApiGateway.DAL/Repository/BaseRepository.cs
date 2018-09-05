@@ -9,16 +9,11 @@ namespace ApiGateway.DAL.Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        private string _conString { get; set; }
-
-        public BaseRepository(string connString)
-        {
-            _conString = connString;
-        }
+        public string conString { get; set; }
 
         public long Add(TEntity entity)
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(conString))
             {
                 return con.Insert<TEntity>(entity); 
             }
@@ -26,7 +21,7 @@ namespace ApiGateway.DAL.Repository
 
         public long Add(IEnumerable<TEntity> entity)
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(conString))
             {
                 return con.Insert<IEnumerable<TEntity>>(entity);
             }
@@ -34,7 +29,7 @@ namespace ApiGateway.DAL.Repository
 
         public bool Delete(TEntity entity)
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(conString))
             {
                 return con.Delete<TEntity>(entity);
             }
@@ -42,7 +37,7 @@ namespace ApiGateway.DAL.Repository
 
         public bool Delete(IEnumerable<TEntity> entity)
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(conString))
             {
                 return con.Delete<IEnumerable<TEntity>>(entity);
             }
@@ -50,7 +45,7 @@ namespace ApiGateway.DAL.Repository
 
         public bool Update(TEntity entity)
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(conString))
             {
                 return con.Update<TEntity>(entity);
             }
@@ -58,7 +53,7 @@ namespace ApiGateway.DAL.Repository
 
         public bool Update(IEnumerable<TEntity> entity)
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(conString))
             {
                 return con.Update<IEnumerable<TEntity>>(entity);
             }
@@ -66,7 +61,7 @@ namespace ApiGateway.DAL.Repository
 
         public TEntity Get(int Id)
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(conString))
             {
                 return con.Get<TEntity>(Id);
             }
@@ -74,7 +69,7 @@ namespace ApiGateway.DAL.Repository
 
         public IEnumerable<TEntity> GetAll()
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(conString))
             {
                 return con.GetAll<TEntity>();
             }
@@ -82,7 +77,7 @@ namespace ApiGateway.DAL.Repository
 
         public TEntity GetEntity(int Id)
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(conString))
             {
                 return con.Get<TEntity>(Id);
             }
@@ -90,9 +85,17 @@ namespace ApiGateway.DAL.Repository
 
         public IEnumerable<TEntity> GetEntityByQuery(string sql)
         {
-            using (SqlConnection con = new SqlConnection())
+            using (SqlConnection con = new SqlConnection(conString))
             {
                 return con.Query<TEntity>(sql);
+            }
+        }
+
+        public void ExecuteQuery(string sql)
+        {
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                con.Execute(sql);
             }
         }
 

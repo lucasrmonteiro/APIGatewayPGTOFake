@@ -14,5 +14,6 @@ namespace ApiGateway.DAL.Repository
         IEnumerable<TEntity> GetEntityByQuery(string sql);
         bool Update(IEnumerable<TEntity> entity);
         bool Update(TEntity entity);
+        string conString { get; set; }
     }
 }

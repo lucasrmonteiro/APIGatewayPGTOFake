@@ -8,7 +8,7 @@ namespace GatewayApiClient.DataContracts {
     /// Dados da transação de cartão de crédito
     /// </summary>
     [DataContract(Name = "CreditCardTransaction", Namespace = "")]
-    public class CreditCardTransaction {
+    public class CreditCardTransactionStone {
 
         /// <summary>
         /// Dados do cartão de crédito
