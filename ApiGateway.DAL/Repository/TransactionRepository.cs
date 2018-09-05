@@ -21,6 +21,20 @@ namespace ApiGateway.DAL.Repository
             }
         }
 
+        public IEnumerable<TransacaoLoja> GetTransactions(Loja loja ,Bandeira bandeira)
+        {
+            try
+            {
+                var sql = "SELECT * FROM TransacaoLoja WHERE idLoja =" + loja.idLoja.ToString() + " and IdBandeira =" + bandeira.idBandeira;
+
+                return GetEntityByQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public IEnumerable<TransacaoLoja> GetTransactions(Loja loja)
         {
             try

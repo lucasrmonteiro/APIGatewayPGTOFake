@@ -3,13 +3,14 @@ using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 
 namespace ApiGateway.DAL.Repository
 {
     public class ConfiguracaoLojaRepository : BaseRepository<ConfiguracaoLoja>, IConfiguracaoLojaRepository
     {
-        public IList<ConfiguracaoLoja> GetConfiguracaoLoja(Loja loja)
+        public ConfiguracaoLoja GetConfiguracaoLoja(Loja loja ,Bandeira bandeira)
         {
             try
             {
@@ -17,7 +18,7 @@ namespace ApiGateway.DAL.Repository
                 {
                     var result = con.Query<ConfiguracaoLoja, Loja, Bandeira, GatewayPgtos , ConfiguracaoLoja>
                         (
-                         "SELECT * FROM ConfiguracaoLoja WHERE idLoja = @idLoja",
+                         "SELECT * FROM ConfiguracaoLoja WHERE idLoja = @idLoja and idBandeira =@idBandeira",
                          map:(l,b ,g ,c) => {
                              l.loja = b;
                              l.bandeira = g;
@@ -26,10 +27,12 @@ namespace ApiGateway.DAL.Repository
                              return l;
                          },
                          splitOn: "IdLoja,IdBandeira,IdGateway",
-                         param:  new { @idLoja = loja.idLoja.ToString() }
-                        ).AsList();
+                         param:  new { @idLoja = loja.idLoja.ToString() , @idBandeira = bandeira.idBandeira.ToString() }
+                        );
 
-                    return result;
+                    var lista = result.AsList();
+
+                    return lista.Single();
                 }
 
 

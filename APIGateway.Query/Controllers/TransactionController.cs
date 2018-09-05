@@ -19,7 +19,7 @@ namespace APIGateway.Query.Controllers
         public TransactionController(IConfiguration configuration , ITransactionBLL transaction)
         {
             transactionBLL = transaction;
-
+            transaction.cString = configuration.GetSection("ConnectionStrings:DBGateway").ToString();
         }
 
         [HttpGet("Transactions")]
@@ -34,6 +34,21 @@ namespace APIGateway.Query.Controllers
                 return NotFound(ex);
             }
             
+        }
+
+
+        [HttpPost("NewTransaction")]
+        public IActionResult NewTransaction(TransactionRequestDTO requestDTO)
+        {
+            try
+            {
+                return Ok(transactionBLL.CreateNewTransaction(requestDTO));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex);
+            }
+
         }
     }
 }

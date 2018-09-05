@@ -12,8 +12,4 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Stone\" />
-  </ItemGroup>
-
 </Project>

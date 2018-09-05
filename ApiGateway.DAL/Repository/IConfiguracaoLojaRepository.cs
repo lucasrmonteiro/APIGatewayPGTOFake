@@ -5,6 +5,6 @@ namespace ApiGateway.DAL.Repository
 {
     public interface IConfiguracaoLojaRepository : IBaseRepository<ConfiguracaoLoja>
     {
-        IList<ConfiguracaoLoja> GetConfiguracaoLoja(Loja loja);
+        ConfiguracaoLoja GetConfiguracaoLoja(Loja loja , Bandeira bandeira);
     }
 }
